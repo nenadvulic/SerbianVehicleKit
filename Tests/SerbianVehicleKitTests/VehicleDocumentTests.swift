@@ -29,6 +29,13 @@ final class VehicleDocumentTests: XCTestCase {
         XCTAssertEqual(doc.usersName, "ANA")
     }
 
+    func testDateFormatting() {
+        XCTAssertEqual(VehicleDocument.formatDate("20170726"), "26.07.2017")
+        XCTAssertEqual(VehicleDocument.formatDate("99991231"), "31.12.9999")
+        XCTAssertEqual(VehicleDocument.formatDate(""), "")       // unchanged if malformed
+        XCTAssertEqual(VehicleDocument.formatDate("2017"), "2017")
+    }
+
     func testCodableRoundTrip() throws {
         var doc = VehicleDocument()
         doc.registrationNumberOfVehicle = "BG123-AA"

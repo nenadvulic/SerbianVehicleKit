@@ -58,6 +58,23 @@ public struct VehicleDocument: Codable, Equatable, Sendable {
 
     public init() {}
 
+    /// Converts a `YYYYMMDD` date string (as stored on the card) into `DD.MM.YYYY`.
+    /// Non-conforming input is returned unchanged.
+    public static func formatDate(_ value: String) -> String {
+        guard value.count == 8, value.allSatisfy(\.isNumber) else { return value }
+        let year = value.prefix(4)
+        let month = value.dropFirst(4).prefix(2)
+        let day = value.suffix(2)
+        return "\(day).\(month).\(year)"
+    }
+
+    /// `dateOfFirstRegistration` formatted as `DD.MM.YYYY`.
+    public var dateOfFirstRegistrationFormatted: String { Self.formatDate(dateOfFirstRegistration) }
+    /// `issuingDate` formatted as `DD.MM.YYYY`.
+    public var issuingDateFormatted: String { Self.formatDate(issuingDate) }
+    /// `expiryDate` formatted as `DD.MM.YYYY`.
+    public var expiryDateFormatted: String { Self.formatDate(expiryDate) }
+
     /// Builds a document from a merged BER tree (the four card files combined).
     public init(ber: BER) {
         func setString(_ keyPath: WritableKeyPath<VehicleDocument, String>, _ path: [UInt32]) {

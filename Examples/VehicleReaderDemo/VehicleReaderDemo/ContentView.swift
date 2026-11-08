@@ -70,9 +70,9 @@ struct ContentView: View {
                         row("Seats", doc.numberOfSeats)
                     }
                     Section("Registration dates") {
-                        row("First registration", doc.dateOfFirstRegistration)
-                        row("Issued", doc.issuingDate)
-                        row("Expires", doc.expiryDate)
+                        row("First registration", doc.dateOfFirstRegistrationFormatted)
+                        row("Issued", doc.issuingDateFormatted)
+                        row("Expires", doc.expiryDateFormatted)
                     }
                     Section("Owner") {
                         row("Name", doc.ownerName)
