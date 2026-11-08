@@ -7,7 +7,7 @@ A dependency-free Swift package that reads the **Serbian vehicle registration ca
 **macOS 13+**, using Apple's [CryptoTokenKit](https://developer.apple.com/documentation/cryptotokenkit)
 (`TKSmartCard`).
 
-> ⚖️ For interoperability and research on **your own** documents. The data is personal —
+> ⚖️ For interoperability and research on **your own** documents. The data is personal,
 > handle it accordingly.
 
 See also [SerbianEIDKit](https://github.com/nenadvulic/SerbianEIDKit) for the identity card.
@@ -43,9 +43,9 @@ print(doc.ownerName, doc.ownersSurnameOrBusinessName)
 The vehicle card is an ISO 7816-4 contact chip, but its data model differs from the ID card:
 it uses **standard nested BER-TLV** (ASN.1), not the ID card's proprietary little-endian TLV.
 
-1. **Select the applet** — a three-command sequence (`SELECT` by DF name), tried in three
+1. **Select the applet**: a three-command sequence (`SELECT` by DF name), tried in three
    variants to cover different card generations.
-2. **Read four files** — `D001`, `D011`, `D021`, `D031`:
+2. **Read four files**, `D001`, `D011`, `D021`, `D031`:
    - `SELECT FILE` `00 A4 02 04 <fid>`,
    - read a **32-byte header**, whose BER tag/length give where the structure starts and its size,
    - `READ BINARY` the body in blocks of ≤ 100 bytes.
@@ -89,4 +89,4 @@ from [bas-celik](https://github.com/ubavic/bas-celik) by Nikola Ubavić (MIT). M
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+MIT. See [LICENSE](LICENSE).
